@@ -68,11 +68,11 @@ Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav f
 Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**.<br />
 Convert from .tap to .prg using **dirmaster 3.1.5**. Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**<br />
 
-![From wav to tap.](https://github.com/Geert-Jan77/Disassembler6510/doc/audiotap2.png)
+![From wav to tap.](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/audiotap2.png)
 
 **Example 2:** The _turbo tape 64_ program is on a *.prg file. <br />
 Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**. <br />
 Convert from .tap to sound using **audiotap 2.2.1** Put a type I ferro tape in a Philips D6280 **mono** cassette recorder. <br />
 Record the sound at high volume. Check the physical tape on a commodore 64c.<br />
 
-![From tap to sound.](https://github.com/Geert-Jan77/Disassembler6510/doc/audiotap1.png)
+![From tap to sound.](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/audiotap1.png)
