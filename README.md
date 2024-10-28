@@ -1,5 +1,19 @@
 # Disassembler6510
 
+Assembler listings look like:
+```
+40964 wd 58360 word data
+40962 wd 58235 word data
+40964 by 67,66,77,66,65,83,73,67 byte data cbmbasic
+40972 wd 43056 word data 43056
+
+58360 jsr 58451 jump to subroutine
+(todo e397 20bfe3 jsr $e3bf
+e39a 2022e4 jsr $e422
+e39d a2fb ldx #$fb
+e3a0 d0e4 bne $e386)
+```
+
 ## Table of Contents
 1. [dis.prg or dis.exe](#dis.prg-or-dis.exe)
 2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
@@ -39,6 +53,8 @@ compile "list" 2058                   / compile basic list to memory
 translate list                        / translate basic list to assembler list
 translate list                        / translate assembler list to basic list
 translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
+
+
 ```
 ## Compile Dissassmbler6510
 ## File transfers between a Windows 7 PC and a Commodore 64
