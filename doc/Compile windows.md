@@ -5,7 +5,7 @@ How to compile on 64 bit Windows 7 or newer.
 ## Install MSYS
 
 1. Download the installer: msys2-x86_64-20210725.exe https://github.com/msys2/msys2-installer/releases/download/2021-07-25/msys2-x86_64-20210725.exe Verify with SHA256 checksum 7e055b71306e64192e2612f959f54ae99a5cf57186206ac702d113ef00ba35c0. Use 7zip to verify the checksum.
-![Screenshot](screenshot1.png)
+![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/screenshot1.png)
 2. Run the installer. MSYS2 requires 64 bit Windows 7 or newer.
 3. Enter your desired Installation Folder (short ASCII-only path on a NTFS volume, no accents, no spaces, no symlinks, no subst or network drives, no FAT).
 4. When done, tick [Run MSYS2] now.
@@ -35,6 +35,6 @@ Append ;D:\msys64\mingw64\bin to the path and click [Ok] three times.
 1.  Run "MSYS2 64bit -> MSYS2 MinGW 64-bit" from Start menu. 
 2.  Download the zipped code from https://github.com/Geert-Jan77/sidecutters green *code* button, https://github.com/Geert-Jan77/sidecutters/archive/refs/heads/main.zip and unzip. Find the 'sidecutters-main' folder. The msys shell listens to both ls (Bash command) and dir (DOS command)
 3.  Run the command <code>./compile-MSwin.sh</code>
-![Screenshot](Screenshot3.png)
+![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/screenshot1.png)
 4.  Run the command <code>./'side cutters.exe'</code> This will also work as <code>"side cutters.exe"</code> on a Command Prompt.
  
