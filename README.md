@@ -62,4 +62,4 @@ translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
 For a file transfer from the commodore 64c to a Windows 7 PC free software and a cassette recorder are used.
 The software recource goes from physical tape via .wav file and .tap file to .prg file.
 
-**Example:** The _turbo tape 64_ program is on a commodore 64c tape. Put the tape in a Philips D6280 **mono** cassette recorder, or even a cassette stereo. Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav file of the tape. Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**, Convert from .tap to .prg using **dirmaster 3.1.5**.
+**Example:** The _turbo tape 64_ program is on a commodore 64c tape. Put the tape in a Philips D6280 **mono** cassette recorder, or even a cassette stereo. Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav file of the tape. Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**, Convert from .tap to .prg using **dirmaster 3.1.5**. Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**
