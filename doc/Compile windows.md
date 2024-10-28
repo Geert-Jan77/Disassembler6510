@@ -1,4 +1,4 @@
-# Compile Side Cutters
+# Compile Disassembler6510 from source
 
 How to compile on 64 bit Windows 7 or newer.
 
