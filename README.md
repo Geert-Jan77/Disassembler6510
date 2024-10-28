@@ -23,28 +23,28 @@ e3a0 d0e4 bne $e386)
 6. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
 
 ## dis.prg or dis.exe
-Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.&nbsp;
-Input from ROM/RAM or file; Output text to the standard output stream.&nbsp;
-Use: &nbsp;
-dis <start-adress> <length>&nbsp;
-dis <file> <start-adress> <length>&nbsp;
-&nbsp;
+Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
+Input from ROM/RAM or file; Output text to the standard output stream.<br />
+Use: <br />
+dis \<start-adress\> \<length\><br />
+dis \<file\> \<start-adress\> \<length\><br />
+
 ## compile.prg or compile.exe
-Compile assembler code for the C64 8-bit MOS Teechnology 6510 microprocessor.
-Input from basic list or file; Output to RAM.
-Use: 
-compile "list" <start-adress> 
-compile <file> <start-adress>  
+Compile assembler code for the C64 8-bit MOS Teechnology 6510 microprocessor.<br />
+Input from basic list or file; Output to RAM.<br />
+Use: <br />
+compile \"list\" <start-adress> <br />
+compile \<file\> <start-adress>  <br />
 
 ## translate.prg or translate.exe
-Tranlate basic v2 to assembler code and back.
-Input from basic list or .bas file or .asm file; Output from basic list or .bas file or .asm file;
-Use:
-translate "list"
-translate <file> <file>
+Tranlate basic v2 to assembler code and back.<br />
+Input from basic list or .bas file or .asm file; Output from basic list or .bas file or .asm file;<br />
+Use:<br />
+translate \"list\"<br />
+translate \<file\> \<file\><br />
 
 ## Examples
-all data are represented decimal, not hexadecimal.
+all data are represented decimal, not hexadecimal.<br />
 ```
 dis "turbo64.prg" 32654 256           / disassemble turbo.prg adresses 32654-32910
 dis 58360 14                          / disassemble the reset routine from the commodore 64c kernel
@@ -59,13 +59,20 @@ translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
 
 ## File transfers 
 
-For a file transfer from the commodore 64c to a windows 7 PC free software and a cassette recorder are used.
-The software resource goes from physical tape via .wav file and .tap file to .prg file.
+For a file transfer from the commodore 64c to a windows 7 PC free software and a cassette recorder are used.<br />
+The software resource goes from physical tape via .wav file and .tap file to .prg file.<br />
 
-**Example 1:** The _turbo tape 64_ program is on a commodore 64c tape. Put the tape in a Philips D6280 **mono** cassette recorder, or even a cassette stereo. Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav file of the tape. Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**, Convert from .tap to .prg using **dirmaster 3.1.5**. Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**
+**Example 1:** The _turbo tape 64_ program is on a commodore 64c tape. <br />
+Put the tape in a Philips D6280 **mono** cassette recorder, or even a cassette stereo. <br />
+Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav file of the tape. <br />
+Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**.<br />
+Convert from .tap to .prg using **dirmaster 3.1.5**. Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**<br />
 
 ![From wav to tap.](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/audiotap2.png)
 
-**Example 2:** The _turbo tape 64_ program is on a *.prg file. Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**. Convert from .tap to sound using **audiotap 2.2.1** Put a type I ferro tape in a Philips D6280 **mono** cassette recorder. Record the sound at high volume. Check the physical tape on a commodore 64c.
+**Example 2:** The _turbo tape 64_ program is on a *.prg file. <br />
+Check the .prg file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**. <br />
+Convert from .tap to sound using **audiotap 2.2.1** Put a type I ferro tape in a Philips D6280 **mono** cassette recorder. <br />
+Record the sound at high volume. Check the physical tape on a commodore 64c.<br />
 
 ![From tap to sound.](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/audiotap1.png)
