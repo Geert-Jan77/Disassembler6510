@@ -1,6 +1,6 @@
 # Disassembler6510
 
-Assembler listings look like:
+Assembler listings look like:<br />
 ```
 40964 wd 58360 word data
 40962 wd 58235 word data
@@ -23,12 +23,12 @@ e3a0 d0e4 bne $e386)
 6. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
 
 ## dis.prg or dis.exe
-Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.
-Input from ROM/RAM or file; Output text to the standard output stream.
-Use: 
-dis <start-adress> <length>
-dis <file> <start-adress> <length> 
-
+Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
+Input from ROM/RAM or file; Output text to the standard output stream.<br />
+Use: <br />
+dis <start-adress> <length><br />
+dis <file> <start-adress> <length><br />
+<br />
 ## compile.prg or compile.exe
 Compile assembler code for the C64 8-bit MOS Teechnology 6510 microprocessor.
 Input from basic list or file; Output to RAM.
