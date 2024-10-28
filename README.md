@@ -4,7 +4,7 @@
 2. [Technologies](#technologies)
 3. [Installation](#installation)
 4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
+5. [Examples](#Examples)
 
 ## dis.prg or dis.exe
 Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.
@@ -29,10 +29,12 @@ translate <file> <file>
 
 ## Examples
 all data are represented decimal, not hexadecimal.
-|dis "turbo64.prg" 32654 256           / disassemble turbo.prg adresses 32654-32910|     
-|dis 58360 14                          / disassemble the reset routine from the commodore 64c kernel|
-|compile "turbo64.bas" 2058            / compile turbo64.bas to memory|
-|compile "list" 2058                   / compile basic list to memory|
-|translate list                        / translate basic list to assembler list|
-|translate list                        / translate assembler list to basic list|
-|translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm|
+```
+dis "turbo64.prg" 32654 256           / disassemble turbo.prg adresses 32654-32910
+dis 58360 14                          / disassemble the reset routine from the commodore 64c kernel
+compile "turbo64.bas" 2058            / compile turbo64.bas to memory
+compile "list" 2058                   / compile basic list to memory
+translate list                        / translate basic list to assembler list
+translate list                        / translate assembler list to basic list
+translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
+```
