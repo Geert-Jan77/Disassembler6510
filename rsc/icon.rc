@@ -1,4 +1,4 @@
-IDI_MYICON ICON "side cutters.ico"
-IDI_MYICONB ICON "side cutters.ico"
+IDI_MYICON ICON "Disassembler6510.ico"
+IDI_MYICONB ICON "Disassembler6510.ico"
 
 // compile windres icon.rc -O coff -o icon.res  
