@@ -30,11 +30,11 @@ Append ;D:\msys64\mingw64\bin to the path and click [Ok] three times.
 
 1. Run "MSYS2 64bit -> MSYS2 MSYS" from Start menu. *pacman -S mingw-w64-x86_64-gtk3* 
 
-## Compile and run tests
+## Compile
 
 1.  Run "MSYS2 64bit -> MSYS2 MinGW 64-bit" from Start menu. 
-2.  Download the zipped code from https://github.com/Geert-Jan77/sidecutters green *code* button, https://github.com/Geert-Jan77/sidecutters/archive/refs/heads/main.zip and unzip. Find the 'sidecutters-main' folder. The msys shell listens to both ls (Bash command) and dir (DOS command)
+2.  Download the zipped code from https://github.com/Geert-Jan77/Disassembler6510 green *code* button, https://github.com/Geert-Jan77/Disassembler6510/archive/refs/heads/main.zip and unzip. Find the 'Disassembler6510-main' folder. The msys shell listens to both ls (Bash command) and dir (DOS command)
 3.  Run the command <code>./compile-MSwin.sh</code>
-![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/screenshot1.png)
-4.  Run the command <code>./'side cutters.exe'</code> This will also work as <code>"side cutters.exe"</code> on a Command Prompt.
+![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/screenshot2.png)
+
  
