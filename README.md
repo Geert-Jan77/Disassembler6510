@@ -1,12 +1,12 @@
 # Disassembler6510
 
 ## Table of Contents
-1. [dis.prg or dis.exe](#dis.prg or dis.exe)
-2. [compile.prg or compile.exe](#compile.prg or compile.exe)
+1. [dis.prg or dis.exe](#dis.prg-or-dis.exe)
+2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
 3. [translate.prg or translate.exe](#installation)
 4. [Examples](#Examples)
-5. [Compile Dissassembler6510](#Compile Dissassmbler6510)
-6. [c64 File transfers](#File transfers between a Windows 7 PC and a Commodore 64)
+5. [Compile Dissassembler6510](#Compile-Dissassmbler6510)
+6. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
 
 ## dis.prg or dis.exe
 Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.
