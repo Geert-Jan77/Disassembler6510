@@ -70,10 +70,10 @@ translate list                        / translate assembler list to basic list
 translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
 ```
 
-## Compile Dissassmbler6510
+## Compile Dissassembler6510
+To compile Dissassember from source, see _doc_ folder
 
 ## File transfers 
-
 For a file transfer from the commodore 64c to a windows 7 PC free software and a cassette recorder are used.<br />
 The software resource goes from physical tape via .wav file and .tap file to .prg file.<br />
 
