@@ -2,11 +2,6 @@
 
 Assembler listings look like:&nbsp;
 ```
-40964 wd  58360 word data
-40962 wd  58235 word data
-40964 by  67,66,77,66,65,83,73,67 byte data cbmbasic
-40972 wd  43056 word data 43056
-
 58360 jsr 58451 jump to subroutine
 58360 jsr 58451 Jump Saving Return                    Absolute     
 58363 jsr 58303 Jump Saving Return                    Absolute     
@@ -26,7 +21,12 @@ Assembler listings look like:&nbsp;
 58392 sbc    48 Subtract with Carry                   Immediate    
 58394 sec       Set Carry                             Implied      
 58395 sbc   208 Subtract with Carry                   Immediate    
-58397 rts       Return to Saved                       Implied    
+58397 rts       Return to Saved                       Implied
+
+40964 wd  58360 word data
+40962 wd  58235 word data
+40964 by  67,66,77,66,65,83,73,67 byte data cbmbasic
+40972 wd  43056 word data 43056
 ```
 
 ## Table of Contents
