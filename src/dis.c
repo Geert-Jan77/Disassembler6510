@@ -103,17 +103,17 @@ int main(int argc, char * argv[])
 		printf("file can't be opened \n");
 		return 1;
 	}
+	int iTest = 0;
 	int iCount = 0;
 	int iOperand16 = 0;
 	int iOperand8 = 0;
 	int iLength = 0;
 	int iIndex = 0;
 	int iLines = 0;
-	int iChars = 0;
 	while ((ch = fgetc(file_ptr)) != EOF) 
 	{
 		a++;
-		if ((a >= iNum2)&&(a <= iNum2 + iNum3)) 
+		if ((a > iNum2)&&(a <= iNum2 + iNum3)) 
 		{
 			int bNum1 = (int)ch;
 			if (bNum1 < 0) { bNum1 = bNum1 + 256; }
@@ -153,8 +153,8 @@ int main(int argc, char * argv[])
 						if (iLength == 1) {printf("      %s %s ", cDesc[iIndex], cMod[iIndex]); }
 					}
 				}
-				if ((iIndex == 0)&&((bNum1 > 47)&&(bNum1 < 58)||(bNum1 > 64)&&(bNum1 < 91))) { printf("\n%05i data %c ", a - 1 , ch);} 
-				if ((bNum1 > 47)&&(bNum1 < 58)||(bNum1 > 64)&&(bNum1 < 91)) { iChars++;} 
+				if (((iIndex == 0))&&((bNum1 > 47)&&(bNum1 < 58)||(bNum1 > 64)&&(bNum1 < 91))) { printf("\n%05i data  '%c' ", a - 1 , ch);} 
+				if (iIndex == 0) { printf("\n%05i byte %4i ", a - 1 , bNum1);} 
 			}
 		}
 		// ch
@@ -167,23 +167,6 @@ int main(int argc, char * argv[])
 		printf("dis 58360 14                  / disassemble some of the commodore 64c kernel\n");//reset routine
 	}
 	fclose(file_ptr);
-	a = 0;
-	if (iChars > 3)
-	{
-		printf("\n\nA lot of text was found in the block. Dataview:\n%05i data ", iNum2); 
-		file_ptr = fopen(argv[1], "r");
-		if (NULL == file_ptr) 
-		{
-			printf("file can't be opened \n");
-			return 1;
-		}
-		while ((ch = fgetc(file_ptr)) != EOF) 
-		{
-			a++;
-			if ((a > iNum2)&&(a <= iNum2 + iNum3)) { printf("%c", ch); }
-		}
-		fclose(file_ptr);
-	}
 	return 0;
 
 }
