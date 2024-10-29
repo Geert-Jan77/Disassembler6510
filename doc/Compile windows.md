@@ -13,12 +13,12 @@ How to compile on 64 bit Windows 7 or newer.
 6. Run *MSYS2 MSYS* from Start menu. If this opens *msys2_shell.cmd* file in your text editor, you should save the *msys2_shell.cmd* to *msys2_shell.bat* file. Right-Click *MSYS2 MSYS* from Start menu, and *Properties* from the context menu. Change the shortcut's target from *.cmd* to *.bat*
 7. Update the rest of the base packages with *pacman -Su* if *D:\msys64\usr\bin\gpg-agent.exe* conflicts with your anti-virus software, create an exception for it. Verify the file has SHA256 checksum c5019c0957394776e5d42bfd3db266e4aab1541f82e1ab3feefe323319e0e369.
 
-## Install MinGW
+## Optional: Install MinGW
 
 1. Run "MSYS2 MSYS" from Start menu. *pacman -S --needed base-devel mingw-w64-x86_64-toolchain*
    To start building using the mingw-w64 GCC, close this window and run "MSYS MinGW 64-bit" from Start menu. Now you can call make or gcc to build software for Windows. Check out the introduction page https://www.msys2.org/wiki/MSYS2-introduction/ to learn which Start menu item to use when and which packages to install. Take look at Detailed MSYS2 install guide https://www.msys2.org/wiki/MSYS2-installation/ for troubleshooting and additional details on how to keep your MSYS2 up-to-date.
 
-## Append MinGW to the path
+## Optional: Append MinGW to the path
 
 1.  Hit the [windows start button], right click [Computer]. Select [Computer Properties] from the context menu. On the Left-hand side of the new windows, 
 hit [Advanced system properties]. This opens the Advanced tab of system properties.
@@ -26,7 +26,7 @@ hit [Advanced system properties]. This opens the Advanced tab of system properti
 Append ;D:\msys64\mingw64\bin to the path and click [Ok] three times. 
 3.  Hit the [windows start button], Mouse over the [right arrow icon] right from [Shut down] till the tooltip pops up. Logoff and Logon again. 
 
-## Install GTK
+## Optional: Install GTK
 
 1. Run "MSYS2 64bit -> MSYS2 MSYS" from Start menu. *pacman -S mingw-w64-x86_64-gtk3* 
 
@@ -34,7 +34,7 @@ Append ;D:\msys64\mingw64\bin to the path and click [Ok] three times.
 
 1.  Run "MSYS2 64bit -> MSYS2 MinGW 64-bit" from Start menu. 
 2.  Download the zipped code from https://github.com/Geert-Jan77/Disassembler6510 green *code* button, https://github.com/Geert-Jan77/Disassembler6510/archive/refs/heads/main.zip and unzip. Find the 'Disassembler6510-main' folder. The msys shell listens to both ls (Bash command) and dir (DOS command)
-3.  Run the command <code>./compile-MSwin.sh</code>
+3.  Run the command <code>.build/compile-MSwin.sh</code>
 ![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/screenshot2.png)
 
  
