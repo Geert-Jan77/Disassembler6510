@@ -1,32 +1,21 @@
 # Disassembler6510
 
 Disassemble machine code for the **Commodore 64** 8-bit MOS Technology 6510 microprocessor to an assembler list.<br />
-Assembler listings look like:&nbsp;
+Output listings look like this:&nbsp;
 ```
-58360 jsr 58451 Jump Saving Return                    Absolute     
-58363 jsr 58303 Jump Saving Return                    Absolute     
-58366 jsr 58402 Jump Saving Return                    Absolute     
-58369 ldx   251 Load X Register                       Immediate    
-58371 txs       Transfer X to Stack Pointer           Implied      
-58372 bne   228 Branch on Not Equal                   Relative     
-58374 inc   122 Increment Memory                      Zero Page    
-58376 bne     2 Branch on Not Equal                   Relative     
-58378 inc   123 Increment Memory                      Zero Page    
-58380 lda 60000 Load Accumulator                      Absolute     
-58383 cmp    58 Compare Accumulator                   Immediate    
-58385 bcs    10 Branch on Carry Set                   Relative     
-58387 cmp    32 Compare Accumulator                   Immediate    
-58389 beq   239 Branch on Equal                       Relative     
-58391 sec       Set Carry                             Implied      
-58392 sbc    48 Subtract with Carry                   Immediate    
-58394 sec       Set Carry                             Implied      
-58395 sbc   208 Subtract with Carry                   Immediate    
-58397 rts       Return to Saved                       Implied
+D:\msys64\Projects\Disassembler6510\build>rem disassemble the reset routine from the commodore 64c kernel
+D:\msys64\Projects\Disassembler6510\build>dis 58360 14      
 
-40964 wd  58360 word data
-40962 wd  58235 word data
-40964 by  67,66,77,66,65,83,73,67 byte data cbmbasic
-40972 wd  43056 word data 43056
+Disassembler6510 has decompiled the code into:
+
+adr   mne oprnd description                           mode
+00000 jsr 58451 Jump Saving Return                    Absolute
+00003 jsr 58303 Jump Saving Return                    Absolute
+00006 jsr 58402 Jump Saving Return                    Absolute
+00009 ldx   251 Load X Register                       Immediate
+00011 txs       Transfer X to Stack Pointer           Implied
+00012 bne   228 Branch on Not Equal                   Relative
+D:\msys64\Projects\Disassembler6510\build>_
 ```
 
 ## Table of Contents
