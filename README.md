@@ -1,5 +1,6 @@
 # Disassembler6510
 
+Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor to an assembler list.<br />
 Assembler listings look like:&nbsp;
 ```
 58360 jsr 58451 jump to subroutine
