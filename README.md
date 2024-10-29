@@ -3,7 +3,6 @@
 Disassemble machine code for the **Commodore 64** 8-bit MOS Technology 6510 microprocessor to an assembler list.<br />
 Assembler listings look like:&nbsp;
 ```
-58360 jsr 58451 jump to subroutine
 58360 jsr 58451 Jump Saving Return                    Absolute     
 58363 jsr 58303 Jump Saving Return                    Absolute     
 58366 jsr 58402 Jump Saving Return                    Absolute     
