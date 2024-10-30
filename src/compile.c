@@ -1,101 +1,145 @@
-//char value = *(char*)0x01f4b274; 
-//CHAR * pointer = (CHAR*)0x01f4b274; 
 #include <stdio.h>
-#include <Windows.h>
+#include <stdlib.h>
+#include <string.h>
 
-
-int main(void)
+int main(int argc, char * argv[])
 {
-	HMODULE libHandle;
-	BOOL bRet;
-	UINT uFreq, uDuration;
-	int* address = (int *)0x01f4b274; 
-	printf("Memory address is: 0x%x\n", address);
-	if ((libHandle = LoadLibrary(TEXT("C:/Windows/System32/kernel32.dll"))) == NULL)
-    {
-        printf("load failed\n");
-        return 1;
-    }
-	
-	FARPROC beep;
-    if ((beep = GetProcAddress(libHandle, "Beep")) == NULL)
-    {
-        printf("GetProcAddress failed\n");
-        printf("%d\n", GetLastError());
-        return 1;
-    }
-	printf("beep handle %d\n", beep);
-	uFreq = 1000;
-	uDuration = 200;
-	if (!(bRet = beep(uFreq, uDuration)))
+	char ch;
+	int uCh = 0;
+	unsigned char byte;
+	char *sText = malloc(255);
+	char *sOperator = malloc(15);
+	char *sMode = malloc(15);
+	char *sOperand = malloc(15);
+	int iLn = 0;
+	int iOperand = 0;
+	int iMsb = 0;
+	int iLsb = 0;
+	int iOpc[151] = 
 	{
-		printf("Beep failed\n");
-		return 1;
+		41, 37, 53, 45, 61, 57, 33, 49, 73, 69, 85, 77, 93, 89, 65, 81, 9, 5, 21, 13, 29, 25, 1, 17, 10, 6, 22, 14, 30, 74, 70, 86, 
+		78, 94, 42, 38, 54, 46, 62, 106, 102, 118, 110, 126, 16, 48, 80, 112, 144, 176, 208, 240, 201, 197, 213, 205, 221, 217, 193, 209, 224, 228, 236, 192, 
+		196, 204, 36, 44, 24, 56, 88, 120, 216, 248, 184, 76, 108, 32, 96, 64, 105, 101, 117, 109, 125, 121, 97, 113, 233, 229, 245, 237, 253, 249, 225, 241, 
+		169, 165, 181, 173, 189, 185, 161, 177, 162, 166, 182, 174, 190, 160, 164, 180, 172, 188, 133, 149, 141, 157, 153, 129, 145, 134, 150, 142, 132, 148, 140, 198, 
+		214, 206, 222, 230, 246, 238, 254, 170, 168, 138, 152, 202, 136, 232, 200, 72, 8, 154, 104, 186, 40, 0, 234
+	};
+	char *cMne[] = 
+	{
+		"and", "and", "and", "and", "and", "and", "and", "and", "eor", "eor", "eor", "eor", "eor", "eor", "eor", "eor", "ora", "ora", "ora", "ora", "ora", "ora", "ora", "ora", "asl", 
+		"asl", "asl", "asl", "asl", "lsr", "lsr", "lsr", "lsr", "lsr", "rol", "rol", "rol", "rol", "rol", "ror", "ror", "ror", "ror", "ror", "bpl", "bmi", "bvc", "bvs", "bcc", "bcs", 
+		"bne", "beq", "cmp", "cmp", "cmp", "cmp", "cmp", "cmp", "cmp", "cmp", "cpx", "cpx", "cpx", "cpy", "cpy", "cpy", "bit", "bit", "clc", "sec", "cli", "sei", "cld", "sed", "clv", 
+		"jmp", "jmp", "jsr", "rts", "rti", "adc", "adc", "adc", "adc", "adc", "adc", "adc", "adc", "sbc", "sbc", "sbc", "sbc", "sbc", "sbc", "sbc", "sbc", "lda", "lda", "lda", "lda", 
+		"lda", "lda", "lda", "lda", "ldx", "ldx", "ldx", "ldx", "ldx", "ldy", "ldy", "ldy", "ldy", "ldy", "sta", "sta", "sta", "sta", "sta", "sta", "sta", "stx", "stx", "stx", "sty", 
+		"sty", "sty", "dec", "dec", "dec", "dec", "inc", "inc", "inc", "inc", "tax", "tay", "txa", "tya", "dex", "dey", "inx", "iny", "pha", "php", "txs", "pla", "tsx", "plp", "brk", 
+		"nop"
+	};
+	int iLen[151] = 
+	{
+		2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 
+		2, 2, 3, 2, 2, 3, 2, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 2, 2, 3, 3, 3, 2, 
+		2, 2, 2, 3, 2, 2, 3, 2, 2, 3, 3, 2, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+	};
+	char *cAbbrmod[] = 
+	{
+		"imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "abY", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "acc", 
+		"zer", "zex", "abs", "abx", "acc", "zer", "zex", "abs",	"abx", "acc", "zer", "zex", "abs", "abx", "acc", "zer", "zex", "abs", "abx", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"   ", "   ", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "abs", "imm", "zer", "abs", "zer", "abs", "   ", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"abs", "ind", "abs", "   ", "   ", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", 
+		"abx", "aby", "inx", "iny", "imm", "zer", "zey", "abs", "aby", "imm", "zer", "zex", "abs", "abx", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "zer", "zey", "abs", "zer", 
+		"zex", "abs", "zer", "zex", "abs", "abx", "zer", "zex", "abs", "abx", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"   "
+	};
+	if (argc == 3)
+	{		
+		FILE *load_ptr;
+		load_ptr = fopen(argv[1], "r");
+		if (NULL == load_ptr) 
+		{
+			printf("fopen(%s, %cr%c); file can't be opened \n", '"', '"', argv[1]);
+			return 1;
+		}
+		FILE *save_ptr;
+		save_ptr = fopen(argv[2], "w");
+		if (NULL == save_ptr) 
+		{
+			printf("fopen(%s, %cw%c); file can't be opened \n", '"', '"', argv[2]);
+			return 1;
+		}
+		int iNotEof = 1;
+		int iNotEol = 1;
+		while (iNotEof == 1) 
+		{
+			iOperand = 0;
+			iMsb = 0;
+			iLsb = 0;
+			ch = fgetc(load_ptr); 
+			uCh = (int)ch;
+			if (uCh < 0) uCh = uCh + 256;
+			if (feof(load_ptr)) { iNotEof = 0; } 
+			sText[iLn] = ch;
+			sText[iLn + 1] = '\0';
+			iLn++;
+			if ((uCh == 10) || (uCh == 13) || (iNotEof == 0)) 
+			{
+				iNotEol = 0; 
+				sOperator[0] = sText[6];
+				sOperator[1] = sText[7];
+				sOperator[2] = sText[8];
+				sOperator[3] = '\0';
+				sMode[0] = sText[10];
+				sMode[1] = sText[11];
+				sMode[2] = sText[12];
+				sMode[3] = '\0';
+				sOperand[0] = sText[14];
+				sOperand[1] = sText[15];
+				sOperand[2] = sText[16];
+				sOperand[3] = sText[17];
+				sOperand[4] = sText[18];
+				sOperand[5] = '\0';
+				iLn = 0;	
+				sscanf(sOperand, "%d", &iOperand);
+				iMsb = iOperand / 256;
+				iLsb = iOperand - 256 * iMsb;
+				for (int i = 0; i <= 150; i++) 
+				{
+					if (strcmp(sOperator, cMne[i]) == 0)
+					{
+						if (strcmp(sMode, cAbbrmod[i]) == 0)
+						{
+							byte = (unsigned char)iOpc[i];
+							fputc(byte, save_ptr);
+							printf("%03i,", byte);
+							if (iLen[i] > 1)   
+							{
+								byte = (unsigned char)iLsb;
+								fputc(byte, save_ptr);
+								printf("%03i,", byte);
+							}
+							if (iLen[i] > 2)   
+							{
+								byte = (unsigned char)iMsb;
+								fputc(byte, save_ptr);
+								printf("%03i,", byte);
+							}
+						}
+					}
+				}
+			}
+		}
+		fclose(load_ptr);
+		fclose(save_ptr);
 	}
-
-	FARPROC openprocess;
-    if ((openprocess = GetProcAddress(libHandle, "OpenProcess")) == NULL)
-    {
-        printf("GetProcAddress failed\n");
-        printf("%d\n", GetLastError());
-        return 1;
-    }
-	printf("openprocess handle %d\n", openprocess);
-	UINT uFlags = 0x00000010;
-	BOOL bInherit = 0;
-	UINT uProcess = 0x18c0;
-	INT_PTR hProcess;
-//	if (!(hProcess = openprocess(uFlags, bInherit, uProcess)))
-//	{
-//		printf("OpenProcess failed\n");
-//		return 1;
-//	}
-//	printf("Game Process handle %d\n", hProcess);
-	SIZE_T written;
-	FARPROC ReadProcessMemory;
-    INT_PTR lpBaseAddress;
-    INT_PTR lpBuffer;
-    UINT dwSize;
-    INT_PTR lpNumberOfBytesRead;
-	lpBaseAddress = 0x01f4b274;
-	FLOAT f = 0.0f;
-	lpBuffer = (INT_PTR)&f;
-	dwSize = 4;
-	CHAR buffer[20];
-	lpNumberOfBytesRead = 0;
-	if ((ReadProcessMemory = GetProcAddress(libHandle, "ReadProcessMemory")) == NULL)
-    {
-        printf("GetProcAddress failed\n");
-        printf("%d\n", GetLastError());
-        return 1;
-    }
-	printf("ReadProcessMemory handle %d\n", ReadProcessMemory);
-//	if (!(bRet = ReadProcessMemory(hProcess, lpBaseAddress, &buffer, sizeof(f), lpNumberOfBytesRead)))
-//	{
-//		printf("ReadProcessMemory failed\n");
-//		return 1;
-//	}
-//	printf("Buffer0 %d\n", (byte)buffer[0]);
-//	printf("Buffer1 %d\n", (byte)buffer[1]);
-//	printf("Buffer2 %d\n", (byte)buffer[2]);
-//	printf("Buffer3 %d\n", (byte)buffer[3]);
- 	byte b[] = {(byte)buffer[0], (byte)buffer[1], (byte)buffer[2], (byte)buffer[3]};
-	memcpy(&f, &b, sizeof(f));
-//	printf("f %f\n", f);
-	FARPROC CloseHandle;
-	if ((CloseHandle = GetProcAddress(libHandle, "CloseHandle")) == NULL)
-    {
-        printf("GetProcAddress failed\n");
-        printf("%d\n", GetLastError());
-        return 1;
-    }
-	printf("CloseProcess handle %d\n", CloseHandle);
-//	if (!(bRet = CloseHandle(hProcess)))
-//	{
-//		printf("CloseHandle failed\n");
-//		return 1;
-//	}
-	
-
-  return 0;
+	if (argc < 3)
+	{
+		printf("Compile assembler code for the C64 8-bit MOS Technology 6510 microprocessor. \n");
+		printf("Input from basic list; Output to RAM. \n");
+		printf("Input from file; Output to file. \n");
+		printf("Use: \n");
+		printf("compile %clist%c \n", '"','"' );
+		printf("compile <inputfile> <outputfile> \n");
+		printf("\nExamples:\n");
+		printf("compile %clist%c                       / compile assembler code in the c64 list\n", '"', '"');
+		printf("compile %creset.asm%c %creset.prg%c      / compile assembler code in a file\n", '"', '"', '"', '"');
+	}
+	return 0;
 }
