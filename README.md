@@ -81,7 +81,7 @@ Put the tape in a Philips D6280 **mono** cassette recorder, or even a cassette s
 Use **audacity 3.6.4** recording software on the windows 7 PC to create a .wav file of the tape. <br />
 Convert from .wav to .tap using **audiotap 2.2.1**, Check the .tap file using **tapclean 0.38**.<br />
 Convert from .tap to .d64 file on the pc running a _commodore 64 emulator_ like **gtk3vice 3.8**<br />
-and save from tape to diskette on the emulator. Convert from .tap to .prg using **dirmaster 3.1.5**. <br />
+and save from tape to diskette on the emulator. You need a tape to disk copier like [Giantcopy 64 v1.0](https://commodore.software/downloads/download/132-tape-transfer-tools/337-giantcopy-64-v1-0) to copy a complete tape to a disk. Convert from .d64 to a batch of .prg using **dirmaster 3.1.5**. <br />
 
 ![From wav to tap.](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/audiotap2.png)
 
