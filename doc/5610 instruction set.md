@@ -1,5 +1,5 @@
-|Mode         |Syntax          |Operator|len |time|Mnemonic Description                         |Category              |Extensive Description                      |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Mode         |Syntax         |Operator|len |time|Mnemonic Description                         |Category              |Extensive Description                      |
+|:------------|:---------------|:------|:----|:---|:--------------------------------------------|:---------------------|:------------------------------------------|
 |Immediate    |AND #$44        |$29    |2    |2   |AND Bitwise AND with Accumulator             |Bitwise Instructions  |Take the operand for calculation immediate.|
 |Zero Page    |AND $44         |$25    |2    |3   |AND Bitwise AND with Accumulator             |Bitwise Instructions  |Take the operand as zero page address. |
 |Zero Page,X  |AND $44,X       |$35    |2    |4   |AND Bitwise AND with Accumulator             |Bitwise Instructions  |Take the operand as zero page address plus X. |
