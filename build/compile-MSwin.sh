@@ -6,6 +6,7 @@ windres -i rsc/icon.rc -O coff -o rsc/icon.o
 windres -i rsc/dis.rc -O coff -o rsc/dis.o
 windres -i rsc/compile.rc -O coff -o rsc/compile.o
 windres -i rsc/translate.rc -O coff -o rsc/translate.o
+windres -i rsc/dat.rc -O coff -o rsc/dat.o
 gcc src/dis.c rsc/icon.o rsc/dis.o -o "build/dis.exe" `pkg-config --cflags --libs gtk+-3.0`
 echo Run: Double click 'dis.exe' - MS Windows executable 
 apppath=$(pwd -W)
@@ -57,5 +58,23 @@ echo "oLink.IconLocation = \"${apppath}/rsc/${appname}.ico\"" >> CreateShortcut.
 echo "oLink.Save" >> CreateShortcut.vbs
 cscript -nologo CreateShortcut.vbs
 rm CreateShortcut.vbs
+gcc src/dat.c rsc/icon.o rsc/dat.o -o "build/dat.exe" `pkg-config --cflags --libs gtk+-3.0`
+echo Run: Double click 'dat.exe' - MS Windows executable 
+apppath=$(pwd -W)
+appname="dat"
+shortcutdestinationpath=$startm
+shortcutdestinationpath="${shortcutdestinationpath///\\}"
+shortcutdestinationpath="${shortcutdestinationpath/c/C}"
+printf "Set oWS = WScript.CreateObject(\"WScript.Shell\")\n" > CreateShortcut.vbs
+echo "sLinkFile = \"${shortcutdestinationpath}/${appname}.lnk\"" >> CreateShortcut.vbs
+echo "Set oLink = oWS.CreateShortcut(sLinkFile)" >> CreateShortcut.vbs
+echo "oLink.TargetPath = \"${apppath}/${appname}.exe\"" >> CreateShortcut.vbs
+echo "oLink.WorkingDirectory = \"${apppath}\"" >> CreateShortcut.vbs
+echo "oLink.Description = \"${appname}\"" >> CreateShortcut.vbs
+echo "oLink.IconLocation = \"${apppath}/rsc/${appname}.ico\"" >> CreateShortcut.vbs
+echo "oLink.Save" >> CreateShortcut.vbs
+cscript -nologo CreateShortcut.vbs
+rm CreateShortcut.vbs
+
 echo Press return key. 
 read
