@@ -7,11 +7,11 @@ BEGIN
     BLOCK "040904E4"
     BEGIN
       VALUE "CompanyName", "Disassembler6510"
-      VALUE "FileDescription", "Disassemble machinecode"
+      VALUE "FileDescription", "View Data"
       VALUE "FileVersion", "1.2"
-      VALUE "InternalName", "Disassembler"
+      VALUE "InternalName", "Dataviewer"
       VALUE "LegalCopyright", "Gnu general public license v3"
-      VALUE "OriginalFilename", "dis.exe"
+      VALUE "OriginalFilename", "dat.exe"
       VALUE "ProductName", "Disassembler6510"
       VALUE "ProductVersion", "1.2"
     END
