@@ -26,7 +26,7 @@ D:\msys64\Projects\Disassembler6510\build>_
 4. [dat.prg or dat.exe](#datprg-or-datexe)
 6. [Examples](#Examples)
 7. [Compile Dissassembler6510](#compile-dissassembler6510)
-8. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
+8. [c64 File transfers](#File-transfers)
 
 ## dis.prg or dis.exe
 Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
