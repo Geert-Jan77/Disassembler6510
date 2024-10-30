@@ -8,13 +8,14 @@ D:\msys64\Projects\Disassembler6510\build>dis 58360 14
 
 Disassembler6510 has decompiled the code into:
 
-adr   mne oprnd description                           mode
-58360 jsr 58451 Jump Saving Return                    Absolute
-58363 jsr 58303 Jump Saving Return                    Absolute
-58366 jsr 58402 Jump Saving Return                    Absolute
-58369 ldx   251 Load X Register                       Immediate
-58371 txs       Transfer X to Stack Pointer           Implied
-58372 bne   228 Branch on Not Equal                   Relative
+adr   mne mde oprnd mnemonic description                  mode description
+58360 jsr abs 58451 Jump Saving Return                    Absolute
+58363 jsr abs 58303 Jump Saving Return                    Absolute
+58366 jsr abs 58402 Jump Saving Return                    Absolute
+58369 ldx imm   251 Load X Register                       Immediate
+58371 txs           Transfer X to Stack Pointer           Implied
+58372 bne       228 Branch on Not Equal                   Relative
+
 D:\msys64\Projects\Disassembler6510\build>_
 ```
 
