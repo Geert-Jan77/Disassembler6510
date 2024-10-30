@@ -36,7 +36,7 @@ dis \<start-adress\> \<length\><br />
 dis \<file\> \<start-adress\> \<length\><br />
 
 ## compile.prg or compile.exe
-Compile assembler code for the C64 8-bit MOS Teechnology 6510 microprocessor.<br />
+Compile assembler code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
 Input from basic list or file; Output to RAM.<br />
 Use: <br />
 compile \"list\" <start-adress> <br />
