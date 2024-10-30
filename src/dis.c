@@ -46,6 +46,16 @@ int main(int argc, char * argv[])
 		"Zero Page,X ", "Absolute    ", "Absolute,X  ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", 
 		"Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     "
 	};
+	char *cAbbrmod[] = 
+	{
+		"imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "abY", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "acc", 
+		"zer", "zex", "abs", "abx", "acc", "zer", "zex", "abs",	"abx", "acc", "zer", "zex", "abs", "abx", "acc", "zer", "zex", "abs", "abx", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"   ", "   ", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "abs", "imm", "zer", "abs", "zer", "abs", "   ", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"abs", "ind", "abs", "   ", "   ", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "imm", "zer", "zex", "abs", 
+		"abx", "aby", "inx", "iny", "imm", "zer", "zey", "abs", "aby", "imm", "zer", "zex", "abs", "abx", "zer", "zex", "abs", "abx", "aby", "inx", "iny", "zer", "zey", "abs", "zer", 
+		"zex", "abs", "zer", "zex", "abs", "abx", "zer", "zex", "abs", "abx", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", 
+		"   "
+	};
 	char *cDesc[] = 
 	{
 		"Bitwise AND with Accumulator         ", "Bitwise AND with Accumulator         ", "Bitwise AND with Accumulator         ", "Bitwise AND with Accumulator         ", 
@@ -92,81 +102,101 @@ int main(int argc, char * argv[])
 	iNum2 = 0;
 	iNum3 = 0;	
 	a = 0;
-	if (argc > 1) {sscanf(argv[1], "%d", &iNum1);}
-	if (argc > 2) {sscanf(argv[2], "%d", &iNum2);}
-	if (argc > 3) {sscanf(argv[3], "%d", &iNum3);}
-	FILE *file_ptr;
-	char ch;
-	file_ptr = fopen(argv[1], "r");
-	if (NULL == file_ptr) 
-	{
-		printf("file can't be opened \n");
-		return 1;
-	}
-	int iTest = 0;
-	int iCount = 0;
-	int iOperand16 = 0;
-	int iOperand8 = 0;
-	int iLength = 0;
-	int iIndex = 0;
+	//printf("debug: argc= %d ",argc);
+	if (argc > 1) {sscanf(argv[1], "%d", &iNum1); }
+	if (argc > 2) {sscanf(argv[2], "%d", &iNum2); }
+	if (argc > 3) {sscanf(argv[3], "%d", &iNum3); }
+	if (iNum3 > 256) {iNum3 = 256; }
 	int iLines = 0;
-	while ((ch = fgetc(file_ptr)) != EOF) 
-	{
-		a++;
-		if ((a > iNum2)&&(a <= iNum2 + iNum3)) 
+	if ((argc > 2)&&(argc <5))
+	{		
+		FILE *file_ptr;
+		char ch;
+		file_ptr = fopen(argv[1], "r");
+		if (NULL == file_ptr) 
 		{
-			int bNum1 = (int)ch;
-			if (bNum1 < 0) { bNum1 = bNum1 + 256; }
-			if (iCount > 1)
+			printf("fopen() file can't be opened \n");
+			return 1;
+		}
+		if (fseek(file_ptr, iNum2, SEEK_SET)!=0)
+		{
+			printf("fseek() file position can't be reached \n");
+			return 1;
+		}
+		a = iNum2;
+		int iChars=0;
+		int iTest = 0;
+		int iCount = 0;
+		int iOperand16 = 0;
+		int iOperand8 = 0;
+		int iLength = 0;
+		int iIndex = 0;
+		while (1) 
+		{
+			ch = fgetc(file_ptr);
+			if (feof(file_ptr)) 
 			{
-				if (iCount == 3) {iOperand16 += bNum1;}
-				if (iCount == 2) 
-				{
-					iOperand16 += 256 * bNum1; iOperand8 = bNum1;
-					if (iLength == 3) {printf("%5i %s %s ", iOperand16, cDesc[iIndex], cMod[iIndex]); }	
-					if (iLength == 2) {printf("%5i %s %s ", iOperand8, cDesc[iIndex], cMod[iIndex]); }
-				}
-				iCount--;				
+				printf("\nfeof() end of file at %i\n",a-1);
+				break;
 			}
-			else
+			a++;
+			if ((a > iNum2)&&(a <= iNum2 + iNum3)) 
 			{
-				iCount = 0;
-				iOperand16 = 0;
-				iOperand8 = 0;
-				iLength = 0;
-				iIndex = 0;
-				for (int i = 0; i <= 151; i++) 
+				int bNum1 = (int)ch;
+				if (bNum1 < 0) { bNum1 = bNum1 + 256; }
+				if (iCount > 1)
 				{
-					if (bNum1 == iOpc[i]) 
-					{ 
-						iIndex = i;
-						iLines++;
-						if (iLines == 1)
-						{
-							printf("\nDisassembler6510 has decompiled the code into:\n");
-							printf("\nadr   mne oprnd description                           mode ");
-						}
-						printf("\n%05i ", a - 1);
-						iCount = iLen[i];
-						iLength = iLen[i];
-						printf("%s ", cMne[i]); 
-						if (iLength == 1) {printf("      %s %s ", cDesc[iIndex], cMod[iIndex]); }
+					if (iCount == 3) {iOperand16 += bNum1;}
+					if (iCount == 2) 
+					{
+						iOperand16 += 256 * bNum1; iOperand8 = bNum1;
+						if (iLength == 3) {printf("%5i %s %s ", iOperand16, cDesc[iIndex], cMod[iIndex]); }	
+						if (iLength == 2) {printf("%5i %s %s ", iOperand8, cDesc[iIndex], cMod[iIndex]); }
 					}
+					iCount--;				
 				}
-				if (((iIndex == 0))&&((bNum1 > 47)&&(bNum1 < 58)||(bNum1 > 64)&&(bNum1 < 91))) { printf("\n%05i data  '%c' ", a - 1 , ch);} 
-				if (iIndex == 0) { printf("\n%05i byte %4i ", a - 1 , bNum1);} 
+				else
+				{
+					iCount = 0;
+					iOperand16 = 0;
+					iOperand8 = 0;
+					iLength = 0;
+					iIndex = 0;
+					for (int i = 0; i <= 150; i++) 
+					{
+						if (bNum1 == iOpc[i]) 
+						{ 
+							iIndex = i;
+							iLines++;
+							if (iLines == 1)
+							{
+								printf("\nDisassembler6510 has decompiled the code into:\n");
+								printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
+							}
+							printf("\n%05i ", a - 1);
+							iCount = iLen[i];
+							iLength = iLen[i];
+							printf("%s %s ", cMne[i], cAbbrmod[i]); 
+							if (iLength == 1) {printf("      %s %s ", cDesc[iIndex], cMod[iIndex]); }
+						}
+					}
+					if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
+					if (iIndex == 0) { printf("\n%05i byte %4i ", a - 1 , bNum1);} 
+				}
 			}
 		}
-		// ch
+		fclose(file_ptr);
+		if (iChars > 4) { printf("\nFound %i ascii characters, use %cdat%c for dataview.\n",iChars, '"', '"'); }
 	}
 	if (iLines == 0)
 	{
+		printf("\nDisassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.\nInput from ROM/RAM or file; Output text to the standard output stream.\n");
 		printf("Use:\ndis <start-adress> <length>\ndis <file> <start-adress> <length>\n");
 		printf("\nExamples:\n");
-		printf("dis %cturbo64.prg%c 32654 256   / disassemble turbo.prg adresses 32654-32910\n", '"', '"');
-		printf("dis 58360 14                  / disassemble some of the commodore 64c kernel\n");//reset routine
+		printf("dis %cturbo64.prg%c 32654 256   / disassemble turbo.prg adresses 32654-32910\n", '"', '"');  // Or escape sequence /"
+		printf("dis 58360 14                  / disassemble some of the commodore 64c kernel\n");            // Reset routine
 	}
-	fclose(file_ptr);
+	
 	return 0;
-
+	
 }
