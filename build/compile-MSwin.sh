@@ -5,7 +5,7 @@ gcc --version | awk '/gcc/ && ($7+0)==11.2{print "Version is correct"}'
 windres -i rsc/icon.rc -O coff -o rsc/icon.o
 windres -i rsc/dis.rc -O coff -o rsc/dis.o
 windres -i rsc/compile.rc -O coff -o rsc/compile.o
-windres -i rsc/translate.rc -O coff -o rsc/translate.o
+windres -i rsc/help.rc -O coff -o rsc/help.o
 windres -i rsc/dat.rc -O coff -o rsc/dat.o
 gcc src/dis.c rsc/icon.o rsc/dis.o -o "build/dis.exe" `pkg-config --cflags --libs gtk+-3.0`
 echo Run: Double click 'dis.exe' - MS Windows executable 
@@ -41,10 +41,10 @@ echo "oLink.IconLocation = \"${apppath}/rsc/${appname}.ico\"" >> CreateShortcut.
 echo "oLink.Save" >> CreateShortcut.vbs
 cscript -nologo CreateShortcut.vbs
 rm CreateShortcut.vbs
-gcc src/translate.c rsc/icon.o rsc/translate.o -o "build/translate.exe" `pkg-config --cflags --libs gtk+-3.0`
-echo Run: Double click 'translate.exe' - MS Windows executable 
+gcc src/help.c rsc/icon.o rsc/help.o -o "build/help.exe" `pkg-config --cflags --libs gtk+-3.0`
+echo Run: Double click 'help.exe' - MS Windows executable 
 apppath=$(pwd -W)
-appname="translate"
+appname="help"
 shortcutdestinationpath=$startm
 shortcutdestinationpath="${shortcutdestinationpath///\\}"
 shortcutdestinationpath="${shortcutdestinationpath/c/C}"
