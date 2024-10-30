@@ -22,10 +22,11 @@ D:\msys64\Projects\Disassembler6510\build>_
 ## Table of Contents
 1. [dis.prg or dis.exe](#dis.prg-or-dis.exe)
 2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
-3. [translate.prg or translate.exe](#installation)
-4. [Examples](#Examples)
-5. [Compile Dissassembler6510](#Compile-Dissassmbler6510)
-6. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
+3. [translate.prg or translate.exe](#translate.prg-or-translate.exe)
+4. [dat.prg or dat.exe](#dat.prg-or-dat.exe)
+6. [Examples](#Examples)
+7. [Compile Dissassembler6510](#Compile-Dissassmbler6510)
+8. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
 
 ## dis.prg or dis.exe
 Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
@@ -47,6 +48,13 @@ Input from basic list or .bas file or .asm file; Output from basic list or .bas 
 Use:<br />
 translate \"list\"<br />
 translate \<file\> \<file\><br />
+
+## dat.prg or dat.exe
+View data specially for the C64 8-bit MOS Technology 6510 microprocessor.<br />
+Input from ROM/RAM or file; Output text to the standard output stream.<br />
+Use: <br />
+dat \<start-adress\> \<length\><br />
+dat \<file\> \<start-adress\> \<length\><br />
 
 ## Examples
 all data are represented decimal, not hexadecimal.<br />
