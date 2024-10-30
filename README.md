@@ -20,7 +20,7 @@ D:\msys64\Projects\Disassembler6510\build>_
 ```
 
 ## Table of Contents
-1. [dis.prg or dis.exe](#dis.prg-or-dis.exe)
+1. [dis.prg or dis.exe](#dis.prg_or_dis.exe)
 2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
 3. [help.prg or help.exe](#help.prg-or-help.exe)
 4. [dat.prg or dat.exe](#dat.prg-or-dat.exe)
