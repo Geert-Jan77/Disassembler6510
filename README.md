@@ -1,10 +1,10 @@
-# Disassembler6510
+<br />
+work in progress <br />
+Milestone 1: dis.exe fully functional  <br />
+Milestone 2: dat.exe fully functional  <br />
+<br />
 
-<br />
- _work in progress_ <br />
- _Milestone_:_dis.exe_fully_functional_ <br />
- _Milestone_:_dat.exe_fully_functional_ <br />
-<br />
+# Disassembler6510
 
 Disassemble machine code for the **Commodore 64** 8-bit MOS Technology 6510 microprocessor to an assembler list.<br />
 Output listings look like this:&nbsp;
