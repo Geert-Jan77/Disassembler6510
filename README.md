@@ -36,11 +36,12 @@ dis \<start-adress\> \<length\><br />
 dis \<file\> \<start-adress\> \<length\><br />
 
 ## compile.prg or compile.exe
-Compile assembler code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
-Input from basic list or file; Output to RAM.<br />
+Compile assembler code for the C64 8-bit MOS Technology 6510 microprocessor. <br />
+Input from basic list; Output to RAM. <br />
+Input from file; Output to file. <br />
 Use: <br />
-compile \"list\" <start-adress> <br />
-compile \<file\> <start-adress>  <br />
+compile \"list\" <br />
+compile \<inputfile\> \<outputfile\> <br />
 
 ## translate.prg or translate.exe
 Tranlate basic v2 to assembler code and back.<br />
