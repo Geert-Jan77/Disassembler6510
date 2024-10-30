@@ -20,10 +20,10 @@ D:\msys64\Projects\Disassembler6510\build>_
 ```
 
 ## Table of Contents
-1. [dis.prg or dis.exe](#dis.prg_or_dis.exe)
-2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
-3. [help.prg or help.exe](#help.prg-or-help.exe)
-4. [dat.prg or dat.exe](#dat.prg-or-dat.exe)
+1. [dis.prg or dis.exe](#disprg-or-disexe)
+2. [compile.prg or compile.exe](#compileprg-or-compileexe)
+3. [help.prg or help.exe](#helpprg-or-helpexe)
+4. [dat.prg or dat.exe](#datprg-or-datexe)
 6. [Examples](#Examples)
 7. [Compile Dissassembler6510](#Compile-Dissassmbler6510)
 8. [c64 File transfers](#File-transfers-between-a-Windows-7-PC-and-a-Commodore-64)
