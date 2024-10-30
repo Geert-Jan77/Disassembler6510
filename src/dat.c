@@ -9,7 +9,7 @@ int main(int argc, char * argv[])
 	iNum1 = 0;
 	iNum2 = 0;
 	iNum3 = 0;	
-	char * sText = malloc(255);;
+	char * sText = malloc(255);
 	a = 0;
 	unsigned char byte = 34;
 	unsigned char mask = 1; 
