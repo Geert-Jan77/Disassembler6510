@@ -1,4 +1,5 @@
-﻿using System;
+// not used in this project. shows how to translate dis.c into *.cs
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
