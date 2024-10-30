@@ -1,5 +1,4 @@
-//disassembler6510
-//print all numbers decimal, nothing hexadecimal
+//help.c compiler gcc 11.7, OS win7, help.exe provides help for assembler language the commodore 64 processor. github Disassembler6510
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -243,31 +242,29 @@ int main(int argc, char * argv[])
 		"BRK sets the B flag, and then generates a forced interrupt. The Interrupt flag is ignored and the CPU goes through the normal interrupt process. In the interrupt service routine, the state of the B flag can be used to distinguish a BRK from a standard interrupt.BRK causes a non-maskable interrupt and increments the program counter by one. ", 
 		"A NOP takes 2 machine cycles to execute, but it has no effect on any register, memory location, or processor flag. Thus, it takes up time and space but performs no operation."
 	};
-	
 	char *sDescr = malloc(40);
 	int iSpc = 0;
 	char ch = 'A';
 	int iLoop = 1;
-		
 	if ((argc == 3))
 	{		
 		for (int i = 0; i <= 150; i++) 
 		{
-					if (strcmp(argv[1], cMne[i]) == 0)
-					{
-						if (strcmp(argv[2], cAbbrmod[i]) == 0)
-						{
-							printf("Providing help on %s %s\n",cMne[i],cAbbrmod[i]);
-							printf("The mnemonic means %s \n", cDesc[i]);
-							printf("The adressing mode is %s \n", cMod[i]);
-							printf("The operand is %i bytes ", iLen[i] - 1);
-							printf("it is a %i byte instruction \n", iLen[i]);
-							printf("The category is %s \n", sCat[i]);
-							printf("The operator code is %i decimal \n", iOpc[i]);
-							printf("The instruction is usually written as %s \n", cSyn[i]);
-							printf("%s", sExt[i]);
-						}
-					}
+			if (strcmp(argv[1], cMne[i]) == 0)
+			{
+				if (strcmp(argv[2], cAbbrmod[i]) == 0)
+				{
+					printf("Providing help on %s %s\n",cMne[i],cAbbrmod[i]);
+					printf("The mnemonic means %s \n", cDesc[i]);
+					printf("The adressing mode is %s \n", cMod[i]);
+					printf("The operand is %i bytes ", iLen[i] - 1);
+					printf("it is a %i byte instruction \n", iLen[i]);
+					printf("The category is %s \n", sCat[i]);
+					printf("The operator code is %i decimal \n", iOpc[i]);
+					printf("The instruction is usually written as %s \n", cSyn[i]);
+					printf("%s", sExt[i]);
+				}
+			}
 		}
 	}
 	if (argc < 2)
@@ -279,6 +276,4 @@ int main(int argc, char * argv[])
 		printf("help cmp imm \n"); 
 	}		
 	return 0;
-	
-	
 }

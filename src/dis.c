@@ -1,5 +1,5 @@
-//disassembler6510
-//print all numbers decimal, nothing hexadecimal
+//dis.c compiler gcc 11.7, OS win7, dis.exe disassembles machinecode for the commodore 64 processor. github Disassembler6510
+
 #include <stdio.h>
 
 int main(int argc, char * argv[])
@@ -102,7 +102,6 @@ int main(int argc, char * argv[])
 	iNum2 = 0;
 	iNum3 = 0;	
 	a = 0;
-	//printf("debug: argc= %d ",argc);
 	if (argc > 1) {sscanf(argv[1], "%d", &iNum1); }
 	if (argc > 2) {sscanf(argv[2], "%d", &iNum2); }
 	if (argc > 3) {sscanf(argv[3], "%d", &iNum3); }
@@ -196,7 +195,5 @@ int main(int argc, char * argv[])
 		printf("dis %cturbo64.prg%c 32654 256   / disassemble turbo.prg adresses 32654-32910\n", '"', '"');  // Or escape sequence /"
 		printf("dis 58360 14                  / disassemble some of the commodore 64c kernel\n");            // Reset routine
 	}
-	
-	return 0;
-	
+	return 0;	
 }

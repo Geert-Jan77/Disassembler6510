@@ -1,5 +1,5 @@
-//disassembler6510
-//print all numbers decimal, nothing hexadecimal
+//dat.c compiler gcc 11.7, OS win7, dat.exe gives a dataview of the file showing bits, bytes, words, adresses, ascii. github Disassembler6510
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,8 +14,6 @@ int main(int argc, char * argv[])
 	unsigned char byte = 34;
 	unsigned char mask = 1; 
 	unsigned char bits[8];
-	
-	//printf("debug: argc= %d ",argc);
 	if (argc > 1) {sscanf(argv[1], "%d", &iNum1); }
 	if (argc > 2) {sscanf(argv[2], "%d", &iNum2); }
 	if (argc > 3) {sscanf(argv[3], "%d", &iNum3); }
@@ -100,5 +98,4 @@ int main(int argc, char * argv[])
 		printf("dat 58360 14                  / view data of some commodore 64c kernel\n");//reset routine
 	}
 	return 0;
-	
 }

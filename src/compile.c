@@ -1,3 +1,5 @@
+//compile.c compiler gcc 11.7, OS win7, compiler.exe compiles assembler listings for the commodore 64 processor. github Disassembler6510
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
