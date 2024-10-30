@@ -22,7 +22,7 @@ D:\msys64\Projects\Disassembler6510\build>_
 ## Table of Contents
 1. [dis.prg or dis.exe](#dis.prg-or-dis.exe)
 2. [compile.prg or compile.exe](#compile.prg-or-compile.exe)
-3. [translate.prg or translate.exe](#translate.prg-or-translate.exe)
+3. [help.prg or help.exe](#help.prg-or-help.exe)
 4. [dat.prg or dat.exe](#dat.prg-or-dat.exe)
 6. [Examples](#Examples)
 7. [Compile Dissassembler6510](#Compile-Dissassmbler6510)
@@ -43,12 +43,12 @@ Use: <br />
 compile \"list\" <br />
 compile \<inputfile\> \<outputfile\> <br />
 
-## translate.prg or translate.exe
-Tranlate basic v2 to assembler code and back.<br />
-Input from basic list or .bas file or .asm file; Output from basic list or .bas file or .asm file;<br />
-Use:<br />
-translate \"list\"<br />
-translate \<file\> \<file\><br />
+## help.prg or help.exe
+Show extensive help information about a specific assembler line <br />
+for the C64 8-bit MOS Technology 6510 microprocessor. <br />
+Input from the standard input stream.; Output text to the standard output stream. <br />
+Use: <br />
+help \<operator\> \<adressing mode\> <br />
 
 ## dat.prg or dat.exe
 View data specially for the C64 8-bit MOS Technology 6510 microprocessor.<br />
