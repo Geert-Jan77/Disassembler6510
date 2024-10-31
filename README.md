@@ -70,7 +70,7 @@ translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
 ```
 
 ## Compile Dissassembler6510
-To compile Dissassember from source, see _doc_ folder
+To compile Dissassember from source, see _doc_ folder [Compile windows.md](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/Compile%20windows.md)
 
 ## File transfers 
 For a file transfer from the commodore 64c to a windows 7 PC free software and a cassette recorder are used.<br />
