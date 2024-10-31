@@ -132,9 +132,12 @@ int main(int argc, char * argv[])
 		int iOperand8 = 0;
 		int iLength = 0;
 		int iIndex = 0;
-		int iFoundBrk = 0;
+		int iOffset = 0;
+		int iPointer = 0;
 		int iBasic = 1;
-		
+		int iLinebreak = 0;
+		int iLinenumber = 0;
+		int iLinenumber2 = 0;
 		if (iNum2 == 0)
 		{
 			while (iBasic) 
@@ -161,8 +164,14 @@ int main(int argc, char * argv[])
 						if (iCount == 2) 
 						{
 							iOperand16 += 256 * bNum1; iOperand8 = bNum1;
-							if (iLength == 3) {printf("%5i %s %s ", iOperand16, cDesc[iIndex], cMod[iIndex]); }	
-							if (iLength == 2) {printf("%5i %s %s ", iOperand8, cDesc[iIndex], cMod[iIndex]); }
+							if (iLength == 3) 
+							{
+								printf("%5i ", iOperand16); 
+								if ((iNum2 == 0) && (a == 2)) { iOffset = iOperand16 - 2; }
+								if (iLinenumber2 == 1) { printf("Basic line number"); iLinenumber2 = 0; }
+								if (iPointer == 1 && iOperand16!=0) { printf("Point to next line"); iPointer = 0; }
+							} 	if (iPointer == 1 && iOperand16==0) { printf("End of Basic list"); iPointer = 0; }
+							if (iLength == 2) {printf("%5i ", iOperand8); }
 						}
 						iCount--;				
 					}
@@ -178,7 +187,7 @@ int main(int argc, char * argv[])
 						{
 							printf("\nDisassembler6510 has decompiled the code into:\n");
 							printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
-							printf("\n%05i ", a - 1);
+							printf("\n%05i ", a - 1 + iOffset);
 						}
 						if (a == 1 && iNum2 == 0) 
 						{ 
@@ -187,6 +196,18 @@ int main(int argc, char * argv[])
 							iLength = 3;
 							iCount = 2;
 							printf(".dt     "); 
+							
+						}
+						
+						if (iLinenumber == 1) 
+						{
+							iLinenumber = 0;
+							iLinenumber2 = 1;
+							iOperand16 += bNum1;
+							iIndex = 151;
+							iLength = 3;
+							iCount = 2;
+							printf("\n%05i .dt     ", a - 1 + iOffset); 
 						}
 						if (a == 3 && iNum2 == 0) 
 						{ 
@@ -194,15 +215,43 @@ int main(int argc, char * argv[])
 							iIndex = 151;
 							iLength = 3;
 							iCount = 2;
-							printf("\n%05i .dt     ", a - 1); 
+							printf("\n%05i .dt     ", a - 1 + iOffset); 
+							iLinenumber = 1;
+							iPointer = 1;
 						}
+						
+						if (iLinebreak == 1) 
+						{ 
+							iPointer = 1;
+							iLinebreak = 0;
+							iLinenumber = 1;
+							iOperand16 += bNum1;
+							iIndex = 151;
+							iLength = 3;
+							iCount = 2;
+							printf("\n%05i .dt     ", a - 1 + iOffset); 
+						}
+						
 						if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
 						if (iIndex == 0)
 						{ 
-							printf("\n%05i .by      %4i ", a - 1 , bNum1);
+							printf("\n%05i .by      %4i ", a - 1 + iOffset, bNum1);
 							if ((bNum1 > 31)&&(bNum1 < 127)) { printf("'%c'", bNum1); } 
-							if (bNum1 == 158) { printf("Basic token 'SYS'"); } 
-							if (bNum1 == 153) { printf("Basic token 'PRINT'"); }
+							if (bNum1 == 171) { printf("'-'"); } 
+							if (bNum1 == 172) { printf("'*'"); } 
+							if (bNum1 == 173) { printf("'/'"); }
+							if (bNum1 == 178) { printf("'='"); } 
+							
+							if (bNum1 == 151) { printf("Basic token 'poke'"); }
+							if (bNum1 == 158) { printf("Basic token 'sys'"); } 
+							if (bNum1 == 153) { printf("Basic token 'print'"); }
+							
+							if (bNum1 == 0) 
+							{ 
+								printf("Line Break");
+								iLinebreak = 1;
+							}	
+							
 						} 
 					}
 				}
@@ -212,7 +261,7 @@ int main(int argc, char * argv[])
 				ch = fgetc(file_ptr);
 				if (feof(file_ptr)) 
 				{
-					printf("\nfeof() end of file at %i\n",a-1);
+					printf("\nfeof() end of file at %i\n", a - 1 + iOffset);
 					break;
 				}
 			a++;
@@ -249,7 +298,7 @@ int main(int argc, char * argv[])
 									printf("\nDisassembler6510 has decompiled the code into:\n");
 									printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
 								}
-								printf("\n%05i ", a - 1);
+								printf("\n%05i ", a - 1  + iOffset);
 								iCount = iLen[i];
 								iLength = iLen[i];
 								printf("%s %s ", cMne[i], cAbbrmod[i]); 
@@ -259,7 +308,7 @@ int main(int argc, char * argv[])
 						if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
 						if (iIndex == 0)
 						{ 
-							printf("\n%05i .by      %4i ", a - 1 , bNum1);
+							printf("\n%05i .by      %4i ", a - 1 + iOffset, bNum1);
 							if ((bNum1 > 31)&&(bNum1 < 127)) { printf("'%c'", bNum1); } 
 						} 
 					}
@@ -271,11 +320,10 @@ int main(int argc, char * argv[])
 	}
 	if (iLines == 0)
 	{
-		printf("\nDisassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.\nInput from ROM/RAM or file; Output text to the standard output stream.\n");
-		printf("Use:\ndis <start-adress> <length>\ndis <file> <start-adress> <length>\n");
+		printf("\nDisassemble PRG files for the C64 8-bit MOS Technology 6510 microprocessor.\nInput from file; Output text to the standard output stream.\n");
+		printf("Use:\nUse:\ndis <file> <start-adress> <length>\nMaximum length 256 byte.\n");
 		printf("\nExamples:\n");
 		printf("dis %cturbo64.prg%c 32654 256   / disassemble turbo.prg adresses 32654-32910\n", '"', '"');  // Or escape sequence /"
-		printf("dis 58360 14                  / disassemble some of the commodore 64c kernel\n");            // Reset routine
 	}
 	return 0;	
 }
