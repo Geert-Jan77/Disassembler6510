@@ -110,7 +110,7 @@ int main(int argc, char * argv[])
 	{		
 		FILE *file_ptr;
 		char ch;
-		file_ptr = fopen(argv[1], "r");
+		file_ptr = fopen(argv[1], "rb");
 		if (NULL == file_ptr) 
 		{
 			printf("fopen() file can't be opened \n");
