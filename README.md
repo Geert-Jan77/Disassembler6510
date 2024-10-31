@@ -23,7 +23,8 @@ feof() end of file at 2066
 
 Found 5 ascii characters, use "dat" for dataview.
 ```
-The assemblercode can also be compiled with the compiler in this project. 
+all data are represented decimal, not hexadecimal.<br />
+The assemblercode can also be compiled with the compiler in this project. <br />
 ![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/changecolor.png)
 
 
@@ -38,17 +39,14 @@ The assemblercode can also be compiled with the compiler in this project.
 
 ## dis.prg or dis.exe
 Disassemble machine code for the C64 8-bit MOS Technology 6510 microprocessor.<br />
-Input from ROM/RAM or file; Output text to the standard output stream.<br />
+Input from file; Output text to the standard output stream.<br />
 Use: <br />
-dis \<start-adress\> \<length\><br />
 dis \<file\> \<start-adress\> \<length\><br />
 
 ## compile.prg or compile.exe
 Compile assembler code for the C64 8-bit MOS Technology 6510 microprocessor. <br />
-Input from basic list; Output to RAM. <br />
 Input from file; Output to file. <br />
 Use: <br />
-compile \"list\" <br />
 compile \<inputfile\> \<outputfile\> <br />
 
 ## help.prg or help.exe
@@ -60,21 +58,16 @@ help \<operator\> \<adressing mode\> <br />
 
 ## dat.prg or dat.exe
 View data specially for the C64 8-bit MOS Technology 6510 microprocessor.<br />
-Input from ROM/RAM or file; Output text to the standard output stream.<br />
+Input from file; Output text to the standard output stream.<br />
 Use: <br />
-dat \<start-adress\> \<length\><br />
 dat \<file\> \<start-adress\> \<length\><br />
 
 ## Examples
-all data are represented decimal, not hexadecimal.<br />
 ```
-dis "turbo64.prg" 32654 256           / disassemble turbo.prg adresses 32654-32910
-dis 58360 14                          / disassemble the reset routine from the commodore 64c kernel
-compile "turbo64.bas" 2058            / compile turbo64.bas to memory
-compile "list" 2058                   / compile basic list to memory
-translate list                        / translate basic list to assembler list
-translate list                        / translate assembler list to basic list
-translate "turbo64.bas" "turbo64.asm" / translate turbo64.bas to turbo64.asm
+dis "changecolor.prg" 0 256 > changecolor.asm           
+compile "changecolor.asm" "changecolor.prg" 
+help "rts" "   "
+dat "changecolor.prg" 0 256
 ```
 
 ## Compile Dissassembler6510
