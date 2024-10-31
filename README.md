@@ -65,7 +65,7 @@ dat \<file\> \<start-adress\> \<length\><br />
 ## Examples
 ```
 dis "changecolor.prg" 0 256 > changecolor.asm           
-compile "changecolor.asm" "changecolor.prg" 
+compile "changecolor.asm" "changecolor.prg" // trim the header and footer before compiling. delete the newline after the last code line.
 help "rts" "   "
 dat "changecolor.prg" 0 256
 ```
