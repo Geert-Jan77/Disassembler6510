@@ -8,6 +8,7 @@ int main(int argc, char * argv[])
 {
 	char ch;
 	int uCh = 0;
+	int iOperatorcolumn = 0;
 	unsigned char byte;
 	char *sText = malloc(255);
 	char *sOperator = malloc(15);
@@ -15,9 +16,9 @@ int main(int argc, char * argv[])
 	char *sOperand = malloc(15);
 	int iLn = 0;
 	int iOperand = 0;
-	int iMsb = 0;
-	int iLsb = 0;
-	int iOpc[151] = 
+	unsigned char iMsb = 0;
+	unsigned char iLsb = 0;
+	unsigned char iOpc[151] = 
 	{
 		41, 37, 53, 45, 61, 57, 33, 49, 73, 69, 85, 77, 93, 89, 65, 81, 9, 5, 21, 13, 29, 25, 1, 17, 10, 6, 22, 14, 30, 74, 70, 86, 
 		78, 94, 42, 38, 54, 46, 62, 106, 102, 118, 110, 126, 16, 48, 80, 112, 144, 176, 208, 240, 201, 197, 213, 205, 221, 217, 193, 209, 224, 228, 236, 192, 
@@ -61,7 +62,7 @@ int main(int argc, char * argv[])
 			return 1;
 		}
 		FILE *save_ptr;
-		save_ptr = fopen(argv[2], "w");
+		save_ptr = fopen(argv[2], "wb");
 		if (NULL == save_ptr) 
 		{
 			printf("fopen(%s, %cw%c); file can't be opened \n", '"', '"', argv[2]);
@@ -100,8 +101,8 @@ int main(int argc, char * argv[])
 				sOperand[5] = '\0';
 				iLn = 0;	
 				sscanf(sOperand, "%d", &iOperand);
-				iMsb = iOperand / 256;
-				iLsb = iOperand - 256 * iMsb;
+				if (iOperand > 255) {iMsb = iOperand / 256; iLsb = iOperand - 256 * iMsb; }
+				if (iOperand < 256) {iLsb = iOperand; } 
 				for (int i = 0; i <= 150; i++) 
 				{
 					if (strcmp(sOperator, cMne[i]) == 0)
@@ -110,21 +111,36 @@ int main(int argc, char * argv[])
 						{
 							byte = (unsigned char)iOpc[i];
 							fputc(byte, save_ptr);
-							printf("%03i,", byte);
+							printf("%i,", byte);
 							if (iLen[i] > 1)   
 							{
 								byte = (unsigned char)iLsb;
 								fputc(byte, save_ptr);
-								printf("%03i,", byte);
+								printf("%i,", byte);
 							}
 							if (iLen[i] > 2)   
 							{
 								byte = (unsigned char)iMsb;
 								fputc(byte, save_ptr);
-								printf("%03i,", byte);
+								printf("%i,", byte);
 							}
 						}
 					}
+				}
+				if (strcmp(sOperator, ".dt") == 0)
+				{
+								byte = (unsigned char)iLsb;
+								fputc(byte, save_ptr);
+								printf("%i,", byte);
+								byte = (unsigned char)iMsb;
+								fputc(byte, save_ptr);
+								printf("%i,", byte);
+				}
+				if (strcmp(sOperator, ".by") == 0)
+				{
+								byte = (unsigned char)iLsb;
+								fputc(byte, save_ptr);
+								printf("%i,", byte);
 				}
 			}
 		}

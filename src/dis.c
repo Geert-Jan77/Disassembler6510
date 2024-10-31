@@ -22,7 +22,6 @@ int main(int argc, char * argv[])
 		"sty", "sty", "dec", "dec", "dec", "dec", "inc", "inc", "inc", "inc", "tax", "tay", "txa", "tya", "dex", "dey", "inx", "iny", "pha", "php", "txs", "pla", "tsx", "plp", "brk", 
 		"nop"
 	};
-		
 	int iLen[151] = 
 	{
 		2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 
@@ -44,7 +43,7 @@ int main(int argc, char * argv[])
 		"Zero Page   ", "Zero Page,X ", "Absolute    ", "Absolute,X  ", "Zero Page   ", "Zero Page,X ", "Absolute    ", "Absolute,X  ", "Absolute,Y  ", "(Indirect,X)", "(Indirect),Y", 
 		"Zero Page   ", "Zero Page,Y ", "Absolute    ", "Zero Page   ", "Zero Page,X ", "Absolute    ", "Zero Page   ", "Zero Page,X ", "Absolute    ", "Absolute,X  ", "Zero Page   ", 
 		"Zero Page,X ", "Absolute    ", "Absolute,X  ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", 
-		"Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     "
+		"Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "Implied     ", "            " 
 	};
 	char *cAbbrmod[] = 
 	{
@@ -95,7 +94,7 @@ int main(int argc, char * argv[])
 		"Transfer A to Y                      ", "Tranfer X to A                       ", "Transfer Y to A                      ", "Decrement X                          ", 
 		"Decrement Y                          ", "Increment X                          ", "Increment Y                          ", "Push Accumulator                     ", 
 		"Push Processor Status                ", "Transfer X to Stack Pointer          ", "Pull Accumulator                     ", "Transfer Stack Pointer to X          ", 
-		"Pull Processor Status                ", "Break                                ", "No Operation                         "
+		"Pull Processor Status                ", "Break                                ", "No Operation                         ", "                                     "
 	};
 	int iNum1, iNum2, iNum3, a;
 	iNum1 = 0;
@@ -126,18 +125,96 @@ int main(int argc, char * argv[])
 		int iChars=0;
 		int iTest = 0;
 		int iCount = 0;
+		int iN1 = 1;
+		int iN2 = 1;
+		int iN3 = 1;
 		int iOperand16 = 0;
 		int iOperand8 = 0;
 		int iLength = 0;
 		int iIndex = 0;
-		while (1) 
+		int iFoundBrk = 0;
+		int iBasic = 1;
+		
+		if (iNum2 == 0)
 		{
-			ch = fgetc(file_ptr);
-			if (feof(file_ptr)) 
+			while (iBasic) 
 			{
-				printf("\nfeof() end of file at %i\n",a-1);
-				break;
+				ch = fgetc(file_ptr);
+				if (feof(file_ptr)) 
+				{
+					printf("\nfeof() end of file at %i\n",a-1);
+					break;
+				}
+				a++;
+				if ((a > iNum2)&&(a <= iNum2 + iNum3)) 
+				{
+					int bNum1 = (int)ch;
+					if (bNum1 < 0) { bNum1 = bNum1 + 256; }
+					iN3 = iN2;
+					iN2 = iN1;
+					if (bNum1 == 0) { iN1 = 0; }
+					if (bNum1 != 0) { iN1 = 1; }
+					if ((iN3 == 0) && (iN2 == 0) && (iN1 == 0)) {iBasic = 0; }
+					if (iCount > 1)
+					{
+						if (iCount == 3) {iOperand16 += bNum1;}
+						if (iCount == 2) 
+						{
+							iOperand16 += 256 * bNum1; iOperand8 = bNum1;
+							if (iLength == 3) {printf("%5i %s %s ", iOperand16, cDesc[iIndex], cMod[iIndex]); }	
+							if (iLength == 2) {printf("%5i %s %s ", iOperand8, cDesc[iIndex], cMod[iIndex]); }
+						}
+						iCount--;				
+					}
+					else
+					{
+						iCount = 0;
+						iOperand16 = 0;
+						iOperand8 = 0;
+						iLength = 0;
+						iIndex = 0;
+						iLines++;
+						if (iLines == 1)
+						{
+							printf("\nDisassembler6510 has decompiled the code into:\n");
+							printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
+							printf("\n%05i ", a - 1);
+						}
+						if (a == 1 && iNum2 == 0) 
+						{ 
+							iOperand16 += bNum1;
+							iIndex = 151;
+							iLength = 3;
+							iCount = 2;
+							printf(".dt     "); 
+						}
+						if (a == 3 && iNum2 == 0) 
+						{ 
+							iOperand16 += bNum1;
+							iIndex = 151;
+							iLength = 3;
+							iCount = 2;
+							printf("\n%05i .dt     ", a - 1); 
+						}
+						if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
+						if (iIndex == 0)
+						{ 
+							printf("\n%05i .by      %4i ", a - 1 , bNum1);
+							if ((bNum1 > 31)&&(bNum1 < 127)) { printf("'%c'", bNum1); } 
+							if (bNum1 == 158) { printf("Basic token 'SYS'"); } 
+							if (bNum1 == 153) { printf("Basic token 'PRINT'"); }
+						} 
+					}
+				}
 			}
+			while (1) 
+			{
+				ch = fgetc(file_ptr);
+				if (feof(file_ptr)) 
+				{
+					printf("\nfeof() end of file at %i\n",a-1);
+					break;
+				}
 			a++;
 			if ((a > iNum2)&&(a <= iNum2 + iNum3)) 
 			{
@@ -153,34 +230,39 @@ int main(int argc, char * argv[])
 						if (iLength == 2) {printf("%5i %s %s ", iOperand8, cDesc[iIndex], cMod[iIndex]); }
 					}
 					iCount--;				
-				}
-				else
-				{
-					iCount = 0;
-					iOperand16 = 0;
-					iOperand8 = 0;
-					iLength = 0;
-					iIndex = 0;
-					for (int i = 0; i <= 150; i++) 
-					{
-						if (bNum1 == iOpc[i]) 
-						{ 
-							iIndex = i;
-							iLines++;
-							if (iLines == 1)
-							{
-								printf("\nDisassembler6510 has decompiled the code into:\n");
-								printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
-							}
-							printf("\n%05i ", a - 1);
-							iCount = iLen[i];
-							iLength = iLen[i];
-							printf("%s %s ", cMne[i], cAbbrmod[i]); 
-							if (iLength == 1) {printf("      %s %s ", cDesc[iIndex], cMod[iIndex]); }
-						}
 					}
-					if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
-					if (iIndex == 0) { printf("\n%05i byte %4i ", a - 1 , bNum1);} 
+					else
+					{
+						iCount = 0;
+						iOperand16 = 0;
+						iOperand8 = 0;
+						iLength = 0;
+						iIndex = 0;
+						for (int i = 0; i <= 150; i++) 
+						{
+							if (bNum1 == iOpc[i]) 
+							{ 
+								iIndex = i;
+								iLines++;
+								if (iLines == 1)
+								{
+									printf("\nDisassembler6510 has decompiled the code into:\n");
+									printf("\nadr   mne mde oprnd mnemonic description                  mode description ");
+								}
+								printf("\n%05i ", a - 1);
+								iCount = iLen[i];
+								iLength = iLen[i];
+								printf("%s %s ", cMne[i], cAbbrmod[i]); 
+								if (iLength == 1) {printf("      %s %s ", cDesc[iIndex], cMod[iIndex]); }
+							}
+						}
+						if ((bNum1 > 31)&&(bNum1 < 127)) { iChars++; } 
+						if (iIndex == 0)
+						{ 
+							printf("\n%05i .by      %4i ", a - 1 , bNum1);
+							if ((bNum1 > 31)&&(bNum1 < 127)) { printf("'%c'", bNum1); } 
+						} 
+					}
 				}
 			}
 		}

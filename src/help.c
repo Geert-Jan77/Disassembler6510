@@ -267,13 +267,14 @@ int main(int argc, char * argv[])
 			}
 		}
 	}
-	if (argc < 2)
+	if (argc != 3)
 	{		
 		printf("\nShow extensive help information about a specific assembler line\n for the C64 8-bit MOS Technology 6510 microprocessor.\nInput from the standard input stream.; Output text to the standard output stream.\n");
 		printf("Use:\nhelp <operator> <adressing mode> \n");
 		printf("\nExamples:\n");
-		printf("help lda abs \n");  
-		printf("help cmp imm \n"); 
+		printf("help %clda%c %cabs%c \n",'"','"','"','"');  
+		printf("help %ccmp%c %cimm%c \n",'"','"','"','"'); 
+		printf("help %crts%c %c   %c \n",'"','"','"','"'); 
 	}		
 	return 0;
 }
