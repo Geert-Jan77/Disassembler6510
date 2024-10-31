@@ -241,7 +241,6 @@ int main(int argc, char * argv[])
 							if (bNum1 == 172) { printf("'*'"); } 
 							if (bNum1 == 173) { printf("'/'"); }
 							if (bNum1 == 178) { printf("'='"); } 
-							
 							if (bNum1 == 151) { printf("Basic token 'poke'"); }
 							if (bNum1 == 158) { printf("Basic token 'sys'"); } 
 							if (bNum1 == 153) { printf("Basic token 'print'"); }

@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 	{		
 		FILE *file_ptr;
 		char ch1,ch2;
-		file_ptr = fopen(argv[1], "r");
+		file_ptr = fopen(argv[1], "rb");
 		if (NULL == file_ptr) 
 		{
 			printf("fopen() file can't be opened \n");
@@ -72,6 +72,18 @@ int main(int argc, char * argv[])
 					if (iChar1 == 1) {printf("%c", ch1); sText[iLen - 2] = ch1; }
 					if (iChar2 == 1) {printf("%c", ch2); sText[iLen - 1] = ch2; }
 					if (iChar2 == 0) {sText[iLen - 1] = ' '; }
+					
+					if (bNum1 == 171) { printf("-"); sText[iLen - 2] = '-'; } 
+					if (bNum1 == 172) { printf("*"); sText[iLen - 2] = '*'; } 
+					if (bNum1 == 173) { printf("/"); sText[iLen - 2] = '/'; }
+					if (bNum1 == 178) { printf("="); sText[iLen - 2] = '='; } 
+					
+					if (bNum2 == 171) { printf("-"); sText[iLen - 1] = '-'; } 
+					if (bNum2 == 172) { printf("*"); sText[iLen - 1] = '*'; } 
+					if (bNum2 == 173) { printf("/"); sText[iLen - 1] = '/'; }
+					if (bNum2 == 178) { printf("="); sText[iLen - 1] = '='; } 
+
+					
 					sText[iLen] = '\0';
 					iLines++;
 				}
