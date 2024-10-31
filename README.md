@@ -3,21 +3,29 @@
 Disassemble machine code for the **Commodore 64** 8-bit MOS Technology 6510 microprocessor to an assembler list.<br />
 Output listings look like this:&nbsp;
 ```
-D:\msys64\Projects\Disassembler6510\build>rem disassemble the reset routine from the commodore 64c kernel
-D:\msys64\Projects\Disassembler6510\build>dis 58360 14      
-
 Disassembler6510 has decompiled the code into:
 
-adr   mne mde oprnd mnemonic description                  mode description
-58360 jsr abs 58451 Jump Saving Return                    Absolute
-58363 jsr abs 58303 Jump Saving Return                    Absolute
-58366 jsr abs 58402 Jump Saving Return                    Absolute
-58369 ldx imm   251 Load X Register                       Immediate
-58371 txs           Transfer X to Stack Pointer           Implied
-58372 bne       228 Branch on Not Equal                   Relative
+adr   mne mde oprnd mnemonic description                  mode description 
+00000 .dt      2049 
+02049 .dt      2059 Point to next line
+02051 .dt        10 Basic line number
+02053 .by       158 Basic token 'sys'
+02054 .by        50 '2'
+02055 .by        48 '0'
+02056 .by        54 '6'
+02057 .by        49 '1'
+02058 .by         0 Line Break
+02059 .dt         0 End of Basic list
+02061 lda imm    12 Load Accumulator                      Immediate    
+02063 sta abs 53280 Store Accumulator                     Absolute     
+02066 rts           Return to Saved                       Implied      
+feof() end of file at 2066
 
-D:\msys64\Projects\Disassembler6510\build>_
+Found 5 ascii characters, use "dat" for dataview.
 ```
+The assemblercode can also be compiled with the compiler in this project. 
+![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/changecolor.png)
+
 
 ## Table of Contents
 1. [dis.prg or dis.exe](#disprg-or-disexe)
