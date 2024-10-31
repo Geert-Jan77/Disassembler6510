@@ -10,4 +10,4 @@
 02059 .dt     00000     // pointer to next basic line
 02061 lda imm 00012     // color grey
 02063 sta abs 53280     // set border color 53280	Border color (only bits #0-#3). 2 red 1 white 6 blue 53281	Background color (only bits #0-#3).
-02066 rts               //  
+02066 rts               // no linebreak
