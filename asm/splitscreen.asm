@@ -1,15 +1,15 @@
 00000 .dt     49152 
 49152 sei           Set Interrupt                            
 49153 lda imm    84 Load Accumulator                         
-49155 sta abs   788 Store Accumulator                        //adress 788=Vector: Hardware Interrupt
+49155 sta abs   788 Store Accumulator                        //adress 788=Vector: Hardware Interrupt, Store adress 49236. This is now the new hardware interrupt service routine.
 49158 lda imm   192 Load Accumulator                         
 49160 sta abs   789 Store Accumulator                        
 49163 lda imm   188 Load Accumulator                         
-49165 sta abs   792 Store Accumulator                        //adress 792=Vector: Non-Maskable Interrupt
+49165 sta abs   792 Store Accumulator                        //adress 792=Vector: Non-Maskable Interrupt, Store adress 49340. This is now the new nonmaskable interrupt service routine.
 49168 lda imm   192 Load Accumulator                         
 49170 sta abs   793 Store Accumulator                        
 49173 lda imm   214 Load Accumulator                         
-49175 sta abs   790 Store Accumulator                        //adress 790=Vector: BRK Instr. Interrupt
+49175 sta abs   790 Store Accumulator                        //adress 790=Vector: BRK Instr. Interrupt, Store adress 49366. This is now the new Brk interrupt service routine.
 49178 lda imm   192 Load Accumulator                         
 49180 sta abs   791 Store Accumulator                        
 49183 lda abs 53265 Load Accumulator                         //adress 53265=Video interface control register b7 Raster Compare 
@@ -34,7 +34,7 @@
 49231 jsr abs 43806 Jump Saving Return                       //adress 43806=Output String
 49234 cli           Clear Interrupt                          
 49235 rts           Return to Saved                          
-49236 lda imm     1 Load Accumulator                         
+49236 lda imm     1 Load Accumulator                         // Start of new hardware interrupt service routine.
 49238 and abs 53273 Bitwise AND with Accumulator             //adress 53273=VIC Interrupt Flag Register (set when IRQ Occurred)7 Set on Any Enabled VIC IRQ Condition b3 Light-Pen Triggered IRQ Flag b2 Sprite to Sprite Collision b1 Sprite to Background Collision b0 Raster Compare
 49241 bne         7 Branch on Not Equal                      
 49243 lda abs 56333 Load Accumulator                         //adress 56333=Complex interface adapter Interrupt control register (Read IRQs/Write Mask) b7 IRQ Flag (1 = IRQ Occurred) / Set-Clear Flag b4 FLAG1 IRQ (Cassette Read / Serial Bus SRQ Input) b3 Serial Port Interrupt b2 Time-of-Day Clock Alarm Interrupt b1 Timer B Interrupt b0 Timer A Interrupt
@@ -42,7 +42,7 @@
 49247 jmp abs 59953 Jump                                     //adress 59953=Main IRQ Entry Point
 49250 sta abs 53273 Store Accumulator                        //adress 53273=VIC Interrupt Flag Register (set when IRQ Occurred)7 Set on Any Enabled VIC IRQ Condition b3 Light-Pen Triggered IRQ Flag b2 Sprite to Sprite Collision b1 Sprite to Background Collision b0 Raster Compare
 49253 ldy zer     2 Load Y Register                          
-49255 bne        11 Branch on Not Equal                      
+49255 bne        11 Branch on Not Equal                      //to 49268
 49257 nop           No Operation                             
 49258 jsr abs 49308 Jump Saving Return                       //adress 49308                            
 49261 inc zer     2 Increment Memory                         
@@ -58,7 +58,7 @@
 49284 lda zer   210 Load Accumulator                         
 49286 and imm     3 Bitwise AND with Accumulator             
 49288 cmp imm     2 Compare Accumulator                      
-49290 bcs         2 Branch on Carry Set                      
+49290 bcs         2 Branch on Carry Set                      //to 49294
 49292 ldy imm     4 Load Y Register                          
 49294 sty abs   648 Store Y Register                         //adress 648=Top of Screen Memory (Page)
 49297 ora abs   648 Bitwise OR with Accumulator              //adress 648=Top of Screen Memory (Page)
@@ -83,7 +83,7 @@
 49334 ora imm   240 Bitwise OR with Accumulator              
 49336 sta abs 53272 Store Accumulator                        //adress 53272=VIC Memory Control Register b7-b4 Video Matrix Base Address (inside VIC) b3-b1 Character Dot-Data Base Address (inside VIC) b0 Select upper/lower Character Set
 49339 rts           Return to Saved                          
-49340 pha           Push Accumulator                         
+49340 pha           Push Accumulator                         // Start of new nonmaskable interrupt service routine.                  
 49341 txa           Tranfer X to A                           
 49342 pha           Push Accumulator                         
 49343 tya           Transfer Y to A                          
@@ -95,7 +95,7 @@
 49355 jmp abs 65138 Jump                                     //adress 65138=Warm Start Basic [BRK]
 49358 jsr abs 63164 Jump Saving Return                       //adress 63164=udtim Bump Clock
 49361 jsr abs 65505 Jump Saving Return                       //adress 65505=jmp ind Test-Stop Vector [63213]
-49364 bne       245 Branch on Not Equal                      
+49364 bne       245 Branch on Not Equal                      //to 49355                  
 49366 jsr abs 64931 Jump Saving Return                       //adress 64931=ioinit Initialise I/O
 49369 jsr abs 58648 Jump Saving Return                       //adress 58648=cint1 Initialize I/O
 49372 jsr abs 49152 Jump Saving Return                       //adress 49152=RAM 4096 bytes                           
