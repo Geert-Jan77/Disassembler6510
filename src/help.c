@@ -246,6 +246,8 @@ int main(int argc, char * argv[])
 	int iSpc = 0;
 	char ch = 'A';
 	int iLoop = 1;
+	int iFirstline = 0;
+	int iEmptymode = 0;
 	if ((argc == 3))
 	{		
 		for (int i = 0; i <= 150; i++) 
@@ -267,7 +269,31 @@ int main(int argc, char * argv[])
 			}
 		}
 	}
-	if (argc != 3)
+	if (argc == 2)
+	{		
+		for (int i = 0; i <= 150; i++) 
+		{
+			if (strcmp(argv[1], cMne[i]) == 0)
+			{
+				if (iFirstline == 0) 
+				{
+					printf("Providing help on %s \n",cMne[i]); 
+					printf("The mnemonic means %s \n", cDesc[i]);
+					printf("The category is %s \n", sCat[i]);
+					if (strcmp(cAbbrmod[i], "   ") == 0)
+					{
+						printf("Use help %s %c   %c",cMne[i], '"', '"');
+						iEmptymode = 1;
+					}
+					if (iEmptymode == 0) { printf("The adressing modes are %s", cAbbrmod[i]); }
+					iFirstline = 1;
+				}
+				if (iEmptymode == 0) { printf(", %s", cAbbrmod[i]); }
+			}
+		}
+		printf(".\n");
+	}
+	if (argc < 2)
 	{		
 		printf("\nShow extensive help information about a specific assembler line\n for the C64 8-bit MOS Technology 6510 microprocessor.\nInput from the standard input stream.; Output text to the standard output stream.\n");
 		printf("Use:\nhelp <operator> <adressing mode> \n");
