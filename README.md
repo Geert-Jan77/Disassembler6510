@@ -21,7 +21,7 @@ Disassembler6510 has decompiled the code into:
 ```
 all data are represented decimal, not hexadecimal.<br />
 The assemblercode can also be compiled with the compiler in this project. <br />
-![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/changecolor.png)
+![screenshot](https://github.com/Geert-Jan77/Disassembler6510/blob/main/doc/IMG_0112.gif)
 
 
 ## Table of Contents
